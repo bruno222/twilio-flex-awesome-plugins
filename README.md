@@ -63,12 +63,53 @@ It can be used as a first place to take a look before starting building a Plugin
 
 ### Custom Logout page
 
-- **What is is:** Fowards the Agent to another page that is not the common flex.twilio.com page.
+- **What is is:** Fowards the Agent to another page that is not the common https://flex.twilio.com page.
 
 ```
     window.Twilio.Flex.Actions.addListener('afterLogout', () => {
         window.location.href = "http://www.google.com";
         });
+```
+
+### Twilio Function example to decide the routing of an Incoming SIP call
+
+- **What is is:** When a Softphone calls in, the function below evaluates if it would be routed to a SIP or a PSTN destination, depending on the size of the "To" number (more than 5 digits? Goes to PSTN)
+
+```
+    const Response = (callback, xml) => {
+        const response = new Twilio.Response();
+        response.appendHeader('Content-Type', 'application/xml');
+        response.setBody(xml.trim());
+        callback(null, response);
+        console.log('response: ', xml.trim());
+    }
+    exports.handler = function(context, event, callback) {
+        console.log('event', event);
+
+        const {To, SipDomain} = event;
+        const callToPSTN = To.replace('sip:','').replace(`@${SipDomain}`, '');
+        const isPSTNCall = callToPSTN.length > 5;
+
+        // Should we forward this call to the PSTN network?
+        if (isPSTNCall) {
+        return Response(callback, `
+            <?xml version="1.0" encoding="UTF-8"?>
+            <Response>
+                <Dial answerOnBridge="true" callerId="+491573599xxxx">${callToPSTN}</Dial>
+            </Response>
+        `);
+        }
+
+        // Or should we forward to the SIP address?
+        return Response(callback, `
+            <?xml version="1.0" encoding="UTF-8"?>
+            <Response>
+                <Dial answerOnBridge="true">
+                    <Sip>${To}</Sip>
+                </Dial>
+            </Response>
+        `);
+    };
 ```
 
 ## Blog posts
