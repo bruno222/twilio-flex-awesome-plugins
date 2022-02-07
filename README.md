@@ -26,7 +26,7 @@ It can be used as a first place to take a look before starting building a Plugin
 
 - **Resources:** [Github repo](https://github.com/bruno222/twilio-flex-sap-c4c-integration)
 
-### Post-call after a bad Survey
+### Post-call after a bad Survey score
 
 - **What is is:** This plugin is an example of how your system can create an outbound call for a Customer, showing some information on the Agent's screen before the call happens. Use-case is when your customer went to your website, bought something, and at the end, there is a survey about the process this customer just faced - for all the bad NPS scores on this survey, you can immediately generate a task for the next available agent to call this customer to know more about the bad experience this customer had, and try to revert this.
 
