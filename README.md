@@ -68,3 +68,21 @@ It can be used as a first place to take a look before starting building a Plugin
 - **What is is:** Blog post showing how to store customer's surveys into Flex Insights
 
 - **Resources:** [Github repo](https://www.twilio.com/blog/post-task-surveys-with-flex-insights)
+
+## Common Questions
+
+### How can I send an extra attribute from my IdP (SSO) to Flex?
+
+As long as your SSO give the SAMLResponse with the correct attribute (like the example below), it will be saved in the Worker's attribute. [More info here](https://www.twilio.com/docs/flex/admin-guide/setup/sso-configuration#attribute-conversion-and-data-types)
+
+```
+    <saml2:Attribute
+        Name="email"
+        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic">
+        <saml2:AttributeValue
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:type="xs:string">agent1@twilio.com
+        </saml2:AttributeValue>
+    </saml2:Attribute>
+```
