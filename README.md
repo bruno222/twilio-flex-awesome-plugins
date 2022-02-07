@@ -61,6 +61,16 @@ It can be used as a first place to take a look before starting building a Plugin
     flex.Notifications.showNotification("VoiceWarning", {issueStr: "testing issue"});
 ```
 
+### Custom Logout page
+
+- **What is is:** Fowards the Agent to another page that is not the common flex.twilio.com page.
+
+```
+    window.Twilio.Flex.Actions.addListener('afterLogout', () => {
+        window.location.href = "http://www.google.com";
+        });
+```
+
 ## Blog posts
 
 ### Show a Survey once a call ends
