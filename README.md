@@ -41,3 +41,30 @@ It can be used as a first place to take a look before starting building a Plugin
 - **Resources:** [Github repo](https://github.com/bruno222/twilio-flex-delete-workers-after-x-days)
 
 - Hashtags for easy finding: `sso`, `github actions`
+
+## Snippets
+
+### Custom Notification
+
+- **What is is:** Show a custom alert/notification for the Agent.
+
+- **Resources:** [Doc](https://www.twilio.com/docs/flex/developer/ui/notifications)
+
+```
+    manager.strings.voiceAlert = "Possible voice network quality issue detected: {{issueStr}}"
+    flex.Notifications.registerNotification({
+    id: "VoiceWarning",
+    content: "voiceAlert",
+    type: flex.NotificationType.error
+    });
+
+    flex.Notifications.showNotification("VoiceWarning", {issueStr: "testing issue"});
+```
+
+## Blog posts
+
+### Show a Survey once a call ends
+
+- **What is is:** Blog post showing how to store customer's surveys into Flex Insights
+
+- **Resources:** [Github repo](https://www.twilio.com/blog/post-task-surveys-with-flex-insights)
